@@ -31,7 +31,7 @@ func (a *App) Routes() http.Handler {
 	mux.Use(middleware.Recoverer)
 	mux.Use(utils.Cors())
 
-	mux.Get("/", a.GenerateQRCode)
+	mux.Get("/qrcodeme/{name}", a.GenerateQRCode)
 
 	return mux
 }
