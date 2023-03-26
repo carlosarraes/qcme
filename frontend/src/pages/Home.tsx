@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-export const URL = 'http://localhost:8080/'
+export const URL = 'https://goqr-4wgfen3n5q-rj.a.run.app/'
 
 export type UserType = {
   name: string
