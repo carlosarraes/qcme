@@ -3,6 +3,7 @@ package models
 import (
 	"database/sql"
 	"errors"
+	"strings"
 )
 
 type Postgress struct {
@@ -20,7 +21,7 @@ func (m *Postgress) Connection() *sql.DB {
 }
 
 func (m *Postgress) CreateUser(user User) error {
-	data, err := m.Exec("INSERT INTO data.qrcode (name, linkedin, github) VALUES ($1, $2, $3)", user.Name, user.Linkedin, user.Github)
+	data, err := m.Exec("INSERT INTO data.qrcode (name, linkedin, github) VALUES ($1, $2, $3)", strings.ToLower(user.Name), user.Linkedin, user.Github)
 	if err != nil {
 		return err
 	}

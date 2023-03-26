@@ -10,8 +10,9 @@ const User = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const lowerCaseName = name!.toLowerCase()
       try {
-        const response = await fetch(URL + name)
+        const response = await fetch(URL + lowerCaseName)
         if (!response.ok) {
           throw new Error('User not found')
         }
