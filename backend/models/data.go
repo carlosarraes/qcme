@@ -8,6 +8,8 @@ import (
 
 type Data interface {
 	Connection() *sql.DB
+	CreateUser(user User) error
+	GetUser(name string) (User, error)
 }
 
 func OpenDB(dsn string) (*sql.DB, error) {
