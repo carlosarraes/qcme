@@ -12,7 +12,7 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-const url = "https://qrcodeme.herokuapp.com/qrcodeme/"
+const url = "https://qcme.vercel.app/"
 
 func (a *App) GenerateQRCode(w http.ResponseWriter, r *http.Request) {
 	var user models.User
