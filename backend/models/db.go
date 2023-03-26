@@ -7,7 +7,7 @@ type Postgress struct {
 }
 
 type User struct {
-	Name     string `json:"Name"`
+	Name     string `json:"name"`
 	Linkedin string `json:"linkedIn"`
 	Github   string `json:"gitHub"`
 }
