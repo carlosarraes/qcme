@@ -2,28 +2,33 @@ package controllers
 
 import (
 	"bytes"
+	"encoding/json"
 	"log"
 	"net/http"
 	"strings"
 	"time"
 
-	"github.com/go-chi/chi/v5"
-	"github.com/skip2/go-qrcode"
+	"github.com/carlosarraes/qcmeback/models"
+	"github.com/carlosarraes/qcmeback/utils"
 )
 
-var url = "https://qrcodeme.herokuapp.com/qrcodeme/"
+const url = "https://qrcodeme.herokuapp.com/qrcodeme/"
 
 func (a *App) GenerateQRCode(w http.ResponseWriter, r *http.Request) {
-	name := strings.ToLower(chi.URLParam(r, "name"))
+	var user models.User
+	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	log.Println(user.Name)
 
-	png, err := qrcode.Encode(url+name, qrcode.Medium, 256)
+	buffer, err := utils.DrawQrCode(url, strings.ToLower(user.Name))
 	if err != nil {
-		log.Fatalf("Failed to generate QR Code: %v", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	w.Header().Set("Content-Type", "image/png")
 	w.Header().Set("Content-Disposition", "attachment; filename=qrcode.png")
-
-	buf := bytes.NewReader(png)
-	http.ServeContent(w, r, "qrcode.png", time.Time{}, buf)
+	http.ServeContent(w, r, "qrcode.png", time.Time{}, bytes.NewReader(buffer.Bytes()))
 }
