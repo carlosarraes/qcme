@@ -21,6 +21,12 @@ func (a *App) GenerateQRCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	checkUser, _ := a.DB.GetUser(user.Name)
+	if checkUser.Name == user.Name {
+		http.Error(w, "user already exists", http.StatusConflict)
+		return
+	}
+
 	buffer, err := utils.DrawQrCode(url, strings.ToLower(user.Name))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
