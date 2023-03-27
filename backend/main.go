@@ -28,7 +28,7 @@ func main() {
 	}
 	defer conn.Close()
 
-	app.DB = &models.Postgress{DB: conn}
+	app.DB = &models.Postgres{DB: conn}
 
 	server := app.Routes()
 
