@@ -44,3 +44,16 @@ func (m *Postgres) GetUser(name string) (User, error) {
 
 	return user, nil
 }
+
+func (m *Postgres) CheckUser(name string) error {
+	var existingName string
+	err := m.QueryRow("SELECT name FROM data.qrcode WHERE name = $1", name).Scan(&existingName)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return err
+		}
+		return err
+	}
+
+	return nil
+}
