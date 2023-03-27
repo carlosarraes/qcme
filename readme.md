@@ -44,7 +44,36 @@ CREATE TABLE data.qrcode (
 ## Tests
 
 ### Front End
+
+#### Tests done with Vitest, MSW for mocking.
+
+<div align="center">
 <img src="./images/frontEnd.png">
+</div>
 
 ### Back End
-No tests have been implemented yet.
+
+### Tests done with native Golang, no packages.
+
+<table align="center">
+<thead>
+<tr>
+<th align="center">
+Controllers
+</th>
+<th align="center">
+Routes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<img src="./images/handlerTest.png" height="400">
+</td>
+<td>
+<img src="./images/routesTest.png" height="400">
+</td>
+</tr>
+</tbody>
+</table>
