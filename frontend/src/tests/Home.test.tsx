@@ -1,19 +1,11 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { BrowserRouter } from 'react-router-dom'
-import { vi } from 'vitest'
+import renderWithRouter from '../mocks/renderWithRouter'
 import Home from '../pages/Home'
 
-const renderWithRouter = (component: JSX.Element) => {
-  return render(<BrowserRouter>{component}</BrowserRouter>)
-}
-
-const readAsDataURL = vi.fn()
-vi.spyOn(FileReader.prototype, 'readAsDataURL').mockImplementation(readAsDataURL)
-
-describe('Home', () => {
+describe('Home Page tests', () => {
   beforeEach(() => {
-    renderWithRouter(<Home />)
+    renderWithRouter(<Home />, { route: '/', path: '/' })
   })
 
   test('renders form correctly', () => {
