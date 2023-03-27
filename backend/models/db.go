@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-type Postgress struct {
+type Postgres struct {
 	*sql.DB
 }
 
@@ -16,11 +16,11 @@ type User struct {
 	Github   string `json:"gitHub"`
 }
 
-func (m *Postgress) Connection() *sql.DB {
+func (m *Postgres) Connection() *sql.DB {
 	return m.DB
 }
 
-func (m *Postgress) CreateUser(user User) error {
+func (m *Postgres) CreateUser(user User) error {
 	data, err := m.Exec("INSERT INTO data.qrcode (name, linkedin, github) VALUES ($1, $2, $3)", strings.ToLower(user.Name), user.Linkedin, user.Github)
 	if err != nil {
 		return err
@@ -35,10 +35,10 @@ func (m *Postgress) CreateUser(user User) error {
 	return nil
 }
 
-func (m *Postgress) GetUser(name string) (User, error) {
+func (m *Postgres) GetUser(name string) (User, error) {
 	var user User
 	err := m.QueryRow("SELECT name, linkedin, github FROM data.qrcode WHERE name = $1", name).Scan(&user.Name, &user.Linkedin, &user.Github)
-	if err != nil {
+	if err != nil || err == sql.ErrNoRows {
 		return user, err
 	}
 
