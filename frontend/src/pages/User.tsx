@@ -12,9 +12,8 @@ const User = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const lowerCaseName = name!.toLowerCase()
       try {
-        const response = await fetch(URL + lowerCaseName)
+        const response = await fetch(URL + name)
         if (!response.ok) {
           throw new Error('User not found')
         }
@@ -24,6 +23,7 @@ const User = () => {
       } catch (e) {
         setLoading(false)
         setNotFound(true)
+        console.log(e)
       }
     }
 
@@ -36,7 +36,10 @@ const User = () => {
 
   if (notFound) {
     return (
-      <main className="flex h-full w-11/12 max-w-sm mx-auto justify-center items-center">
+      <main
+        data-testid="user-not-found"
+        className="flex h-full w-11/12 max-w-sm mx-auto justify-center items-center"
+      >
         <section className="w-full flex flex-col items-start p-4 border-2 border-slate-400 rounded-md shadow-lg">
           <h2 className="text-2xl">
             User <span className="font-bold capitalize">{name}</span> was not found :(
