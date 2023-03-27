@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import Footer from '../components/Footer'
 
 export const URL = 'https://goqr-4wgfen3n5q-rj.a.run.app/'
 
@@ -67,7 +68,7 @@ const Home = () => {
   if (imageData) {
     toast.success('QR Code generated successfully!')
     return (
-      <main className="flex h-full w-11/12 max-w-sm mx-auto justify-center items-center">
+      <main className="flex flex-col h-full w-11/12 max-w-sm mx-auto justify-center items-center">
         <section className="w-full flex flex-col items-start p-4 border-2 border-slate-400 rounded-md shadow-lg">
           <>
             <div className="flex flex-col items-center mt-4 mx-auto">
@@ -83,12 +84,13 @@ const Home = () => {
           </>
         </section>
         <ToastContainer position="top-center" />
+        <Footer />
       </main>
     )
   }
 
   return (
-    <main className="flex h-full w-11/12 max-w-sm mx-auto justify-center items-center">
+    <main className="flex flex-col h-full w-11/12 max-w-sm mx-auto justify-center items-center">
       <section className="w-full flex flex-col items-start p-4 border-2 border-slate-400 rounded-md shadow-lg">
         <h1 className="text-4xl font-bold mx-auto">QrCode Me</h1>
         <hr className="border-2 w-full border-slate-300 shadow-md mb-6" />
@@ -137,6 +139,7 @@ const Home = () => {
           </div>
         </form>
       </section>
+      <Footer />
       <ToastContainer position="top-center" />
     </main>
   )

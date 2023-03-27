@@ -3,6 +3,7 @@ import { AiFillLinkedin, AiFillGithub } from 'react-icons/ai'
 import { useEffect, useState } from 'react'
 import { URL, UserType } from './Home'
 import Spinner from '../components/Spinner'
+import Footer from '../components/Footer'
 
 const User = () => {
   const [user, setUser] = useState<UserType | null>(null)
@@ -38,19 +39,20 @@ const User = () => {
     return (
       <main
         data-testid="user-not-found"
-        className="flex h-full w-11/12 max-w-sm mx-auto justify-center items-center"
+        className="flex flex-col h-full w-11/12 max-w-sm mx-auto justify-center items-center"
       >
         <section className="w-full flex flex-col items-start p-4 border-2 border-slate-400 rounded-md shadow-lg">
           <h2 className="text-2xl">
             User <span className="font-bold capitalize">{name}</span> was not found :(
           </h2>
         </section>
+        <Footer />
       </main>
     )
   }
 
   return (
-    <main className="flex h-full w-11/12 max-w-sm mx-auto justify-center items-center">
+    <main className="flex flex-col h-full w-11/12 max-w-sm mx-auto justify-center items-center">
       <section className="w-full flex flex-col items-start p-4 border-2 border-slate-400 rounded-md shadow-lg">
         <h2 className="text-2xl">Hello! :)</h2>
         <p className="text-md mt-6">
@@ -74,6 +76,7 @@ const User = () => {
           </a>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }
