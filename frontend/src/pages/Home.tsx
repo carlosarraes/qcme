@@ -25,7 +25,7 @@ const Home = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setUser((prev) => ({ ...prev, [name]: value }))
+    setUser((prev) => ({ ...prev, [name]: value.trim() }))
   }
 
   const validateBtn = () => {
